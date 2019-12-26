@@ -12,12 +12,10 @@ func _ready():
 	$Botoes/Conj2/SongsOn.hide()
 
 func _on_SongsOff_pressed():
-	$AudioStreamPlayer.stop()
 	$Botoes/Conj2/SongsOff.hide()
 	$Botoes/Conj2/SongsOn.show()
 
 func _on_SongsOn_pressed():
-	$AudioStreamPlayer.play()
 	$Botoes/Conj2/SongsOff.show()
 	$Botoes/Conj2/SongsOn.hide()
 

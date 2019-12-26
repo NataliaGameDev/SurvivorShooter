@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/TelaInicial.gd" type="Script" id=1]
 [ext_resource path="res://Materials/espacoestrelado.jpg" type="Texture" id=2]
 [ext_resource path="res://Scripts/Botoes.gd" type="Script" id=3]
 [ext_resource path="res://Fontes/earthorbiterbold.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://musica/Reflective.ogg" type="AudioStream" id=5]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -166,11 +165,6 @@ custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_hover = Color( 0.0980392, 0.141176, 0.498039, 1 )
 text = "<-"
 flat = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-autoplay = true
-mix_target = 2
 [connection signal="pressed" from="Botoes/Conj1/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Botoes/Conj1/Settings" to="Botoes" method="_on_Settings_pressed"]
 [connection signal="pressed" from="Botoes/Conj1/Quit" to="Botoes" method="_on_Quit_pressed"]
