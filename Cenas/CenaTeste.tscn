@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/CenaTeste.gd" type="Script" id=1]
+[ext_resource path="res://Assets/popup.png" type="Texture" id=2]
+[ext_resource path="res://Fontes/earthorbiterbold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Cenas/ContinueButton.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 70
+font_data = ExtResource( 3 )
+
+[node name="Principal" type="Node2D"]
+pause_mode = 2
+z_as_relative = false
+script = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
+layer = 2
+
+[node name="PopupMenu" type="PopupMenu" parent="CanvasLayer"]
+margin_left = 91.4487
+margin_top = 310.0
+margin_right = 486.449
+margin_bottom = 647.0
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/PopupMenu"]
+position = Vector2( 195.398, 172.678 )
+scale = Vector2( 1.35504, 1.45673 )
+texture = ExtResource( 2 )
+
+[node name="QuitToMenu" type="Button" parent="CanvasLayer/PopupMenu"]
+margin_left = 3.48486
+margin_top = 260.923
+margin_right = 388.485
+margin_bottom = 316.923
+custom_fonts/font = SubResource( 1 )
+text = "Quit to Menu"
+flat = true
+
+[node name="Continue" type="Button" parent="CanvasLayer/PopupMenu"]
+margin_left = 21.3613
+margin_top = 190.819
+margin_right = 369.361
+margin_bottom = 256.819
+custom_fonts/font = SubResource( 1 )
+text = "CONTINUE"
+flat = true
+script = ExtResource( 4 )
+
+[node name="GamePaused" type="Label" parent="CanvasLayer/PopupMenu"]
+margin_left = 52.6444
+margin_top = 46.9699
+margin_right = 355.644
+margin_bottom = 115.97
+custom_fonts/font = SubResource( 2 )
+text = "Paused!"
+align = 1
+valign = 1
+[connection signal="pressed" from="CanvasLayer/PopupMenu/QuitToMenu" to="." method="_on_QuitToMenu_pressed"]
+[connection signal="pressed" from="CanvasLayer/PopupMenu/Continue" to="CanvasLayer/PopupMenu/Continue" method="_on_Continue_pressed"]

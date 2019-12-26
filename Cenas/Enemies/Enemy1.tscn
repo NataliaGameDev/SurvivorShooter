@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Enemy1.gd" type="Script" id=1]
+[ext_resource path="res://Cenas/Enemies/Enemy1_laser.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Cenas/Enemies/EnemyExplosion.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Enemies.png" type="Texture" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.55955
+height = 11.4081
+
+[node name="Enemy1" type="Area2D"]
+scale = Vector2( 3, 3 )
+collision_mask = 0
+script = ExtResource( 1 )
+enemy_velocity = Vector2( 300, 100 )
+enemy_laser = ExtResource( 2 )
+enemy_explosion = ExtResource( 3 )
+
+[node name="Enemy1_sprite" type="Sprite" parent="."]
+rotation = 3.14159
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 30, 30 )
+
+[node name="Enemy1_CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2( -1.66434, -4.16084 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="EnemyShootTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+[connection signal="area_entered" from="." to="." method="_on_Enemy1_area_entered"]
+[connection signal="timeout" from="EnemyShootTimer" to="." method="_on_EnemyShootTimer_timeout"]

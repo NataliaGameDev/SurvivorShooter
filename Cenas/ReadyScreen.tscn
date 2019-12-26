@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scripts/ReadyScreen.gd" type="Script" id=1]
+[ext_resource path="res://Materials/espacoestrelado.jpg" type="Texture" id=2]
+[ext_resource path="res://Scripts/Ready.gd" type="Script" id=3]
+[ext_resource path="res://Fontes/earthorbiterbold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scripts/StartText.gd" type="Script" id=5]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float speed:hint_range(.01,10.0) = 1.0;
+uniform float scale:hint_range(.01,1.0) = 1.0;
+uniform float distance:hint_range(.5,10.0) = 3.;
+
+void fragment(){
+    vec4 cc_all = vec4(vec3(.0),1.0);
+    float scale_base = 1./scale/distance;
+
+    float percent = fract(TIME*speed);
+
+    for(int i=4;i>=1;i--){
+        float i_seq_before = pow(2.,float(i));
+        float i_seq = pow(2,float(i+1));
+        float scale_small = scale_base/i_seq_before;
+        float scale_big = scale_base/i_seq;
+        vec2 uv = ((UV-.5)*(percent*(scale_small-scale_big)+scale_big)+.5);
+        vec4 cc = texture(TEXTURE, uv);
+        if(i==1){
+            cc.a *= 1.-smoothstep(0.0, 1.0 ,percent);
+        }
+        cc_all.rgb = cc_all.rgb*(1.-cc.a)+cc.rgb*cc.a;
+    }
+    COLOR = cc_all;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/speed = 0.3
+shader_param/scale = 0.5
+shader_param/distance = 1.0
+
+[sub_resource type="DynamicFont" id=3]
+size = 100
+font_data = ExtResource( 4 )
+
+[node name="ReadyScreen" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 2 )
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+
+[node name="GetReadyTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Ready" type="Node2D" parent="."]
+position = Vector2( 576, 400 )
+script = ExtResource( 3 )
+
+[node name="GetReady" type="Label" parent="Ready"]
+margin_right = 376.0
+margin_bottom = 201.0
+custom_fonts/font = SubResource( 3 )
+text = "Get
+Ready!!"
+align = 1
+valign = 1
+
+[node name="MoveTween" type="Tween" parent="Ready"]
+
+[node name="StartText" type="Node2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 5 )
+
+[node name="StartTimer" type="Timer" parent="StartText"]
+wait_time = 5.0
+one_shot = true
+
+[node name="TimerLabel" type="Label" parent="StartText"]
+margin_left = 130.0
+margin_top = 400.0
+margin_right = 468.0
+margin_bottom = 601.0
+custom_fonts/font = SubResource( 3 )
+align = 1
+valign = 1
+[connection signal="timeout" from="GetReadyTimer" to="Ready" method="_on_GetReadyTimer_timeout"]
+[connection signal="timeout" from="StartText/StartTimer" to="." method="_on_StartTimer_timeout"]

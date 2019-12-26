@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/explosion.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/EnemyExplosion.gd" type="Script" id=2]
+[ext_resource path="res://Assets/smoke.png" type="Texture" id=3]
+[ext_resource path="res://Assets/flare.png" type="Texture" id=4]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+angular_velocity = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.2
+scale = 0.5
+
+[node name="EnemyExplosion" type="Sprite"]
+position = Vector2( 332.288, 470.657 )
+z_index = 5
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Smoke" type="Particles2D" parent="."]
+emitting = false
+amount = 200
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource( 1 )
+texture = ExtResource( 3 )
+
+[node name="Flare" type="Particles2D" parent="."]
+emitting = false
+amount = 200
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource( 1 )
+texture = ExtResource( 4 )

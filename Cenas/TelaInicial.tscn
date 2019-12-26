@@ -1,0 +1,179 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Scripts/TelaInicial.gd" type="Script" id=1]
+[ext_resource path="res://Materials/espacoestrelado.jpg" type="Texture" id=2]
+[ext_resource path="res://Scripts/Botoes.gd" type="Script" id=3]
+[ext_resource path="res://Fontes/earthorbiterbold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://musica/Reflective.ogg" type="AudioStream" id=5]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float speed:hint_range(.01,10.0) = 1.0;
+uniform float scale:hint_range(.01,1.0) = 1.0;
+uniform float distance:hint_range(.5,10.0) = 3.;
+
+void fragment(){
+    vec4 cc_all = vec4(vec3(.0),1.0);
+    float scale_base = 1./scale/distance;
+
+    float percent = fract(TIME*speed);
+
+    for(int i=4;i>=1;i--){
+        float i_seq_before = pow(2.,float(i));
+        float i_seq = pow(2.,float(i+1));
+        float scale_small = scale_base/i_seq_before;
+        float scale_big = scale_base/i_seq;
+        vec2 uv = ((UV-.5)*(percent*(scale_small-scale_big)+scale_big)+.5);
+        vec4 cc = texture(TEXTURE, uv);
+        if(i==1){
+            cc.a *= 1.-smoothstep(0.0, 1.0 ,percent);
+        }
+        cc_all.rgb = cc_all.rgb*(1.-cc.a)+cc.rgb*cc.a;
+    }
+    COLOR = cc_all;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/speed = 0.5
+shader_param/scale = 0.1
+shader_param/distance = 4.0
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Fontes/earthorbiterbold.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 85
+outline_color = Color( 0.372549, 0.121569, 0.121569, 1 )
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://Fontes/earthorbiterbold.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 50
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 50
+outline_color = Color( 0.0666667, 0.0627451, 0.592157, 1 )
+font_data = ExtResource( 4 )
+
+[node name="TelaInicial" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 2 )
+margin_right = 576.0
+margin_bottom = 1024.0
+texture = ExtResource( 2 )
+
+[node name="NomeJogo" type="Label" parent="."]
+margin_top = 300.0
+margin_right = 576.0
+margin_bottom = 379.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.933333, 0.933333, 0.933333, 1 )
+text = "Survivor
+Shooter"
+align = 1
+valign = 1
+
+[node name="Botoes" type="Node2D" parent="."]
+position = Vector2( 140, 600 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Conj1" type="VBoxContainer" parent="Botoes"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Start" type="Button" parent="Botoes/Conj1"]
+margin_right = 279.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_hover = Color( 0.0980392, 0.141176, 0.498039, 1 )
+text = "START"
+flat = true
+
+[node name="Settings" type="Button" parent="Botoes/Conj1"]
+margin_top = 60.0
+margin_right = 279.0
+margin_bottom = 116.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_hover = Color( 0.0980392, 0.141176, 0.498039, 1 )
+text = "SETTINGS"
+flat = true
+
+[node name="Quit" type="Button" parent="Botoes/Conj1"]
+margin_top = 120.0
+margin_right = 279.0
+margin_bottom = 176.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color_hover = Color( 0.0941176, 0.0313726, 0.631373, 1 )
+text = "Quit"
+flat = true
+
+[node name="Conj2" type="VBoxContainer" parent="Botoes"]
+editor/display_folded = true
+margin_left = -80.0
+margin_right = 377.0
+margin_bottom = 176.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Dificulty" type="Button" parent="Botoes/Conj2"]
+margin_right = 457.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_hover = Color( 0.0980392, 0.141176, 0.498039, 1 )
+text = "DIFFICULTY"
+flat = true
+
+[node name="SongsOff" type="Button" parent="Botoes/Conj2"]
+margin_top = 60.0
+margin_right = 457.0
+margin_bottom = 116.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_hover = Color( 0.0980392, 0.141176, 0.498039, 1 )
+text = "TURN SONGS OFF"
+flat = true
+
+[node name="SongsOn" type="Button" parent="Botoes/Conj2"]
+margin_top = 120.0
+margin_right = 457.0
+margin_bottom = 176.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_hover = Color( 0.0980392, 0.141176, 0.498039, 1 )
+text = "TURN SONGS ON"
+flat = true
+
+[node name="Back" type="Button" parent="Botoes/Conj2"]
+margin_top = 180.0
+margin_right = 457.0
+margin_bottom = 236.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color_hover = Color( 0.0980392, 0.141176, 0.498039, 1 )
+text = "<-"
+flat = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+mix_target = 2
+[connection signal="pressed" from="Botoes/Conj1/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Botoes/Conj1/Settings" to="Botoes" method="_on_Settings_pressed"]
+[connection signal="pressed" from="Botoes/Conj1/Quit" to="Botoes" method="_on_Quit_pressed"]
+[connection signal="pressed" from="Botoes/Conj2/SongsOff" to="." method="_on_SongsOff_pressed"]
+[connection signal="pressed" from="Botoes/Conj2/SongsOn" to="." method="_on_SongsOn_pressed"]
+[connection signal="pressed" from="Botoes/Conj2/Back" to="Botoes" method="_on_Back_pressed"]

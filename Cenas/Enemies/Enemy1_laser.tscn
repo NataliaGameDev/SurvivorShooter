@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Enemy1_laser.gd" type="Script" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.3374
+
+[node name="Enemy1_laser" type="Area2D"]
+script = ExtResource( 1 )
+laserEnemy_velocity = 10
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 7.0
+margin_bottom = 27.0
+color = Color( 0.788235, 0.698039, 0.207843, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 3.92542, 13.212 )
+shape = SubResource( 1 )
+[connection signal="area_entered" from="." to="." method="_on_Enemy1_laser_area_entered"]
