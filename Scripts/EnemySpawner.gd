@@ -1,6 +1,7 @@
 extends Node2D
 
 export (PackedScene) var enemy1
+export (PackedScene) var enemy2
 
 func _ready():
 	pass
@@ -17,3 +18,9 @@ func _on_Enemy1SpawnTimer_timeout():
 	new_enemy1.position = Vector2( px, randi() % int(get_viewport_rect().size.y/2))
 	add_child(new_enemy1)
 	#pass # Replace with function body.
+
+func _on_Enemy2SpawnTimer_timeout():
+
+	var new_enemy2 = enemy2.instance()
+	new_enemy2.position = Vector2( randi() % int(get_viewport_rect().size.x), 0)
+	add_child(new_enemy2)
