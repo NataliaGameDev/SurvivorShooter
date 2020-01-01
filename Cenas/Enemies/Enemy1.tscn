@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Enemy1.gd" type="Script" id=1]
 [ext_resource path="res://Cenas/Enemies/Enemy1_laser.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Cenas/Enemies/EnemyExplosion.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Enemies.png" type="Texture" id=4]
+[ext_resource path="res://Cenas/Enemies/Enemy1Death.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.55955
@@ -31,5 +32,12 @@ shape = SubResource( 1 )
 [node name="EnemyShootTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="Enemy1Death" parent="." instance=ExtResource( 5 )]
+
+[node name="DeleteTimer" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
 [connection signal="area_entered" from="." to="." method="_on_Enemy1_area_entered"]
 [connection signal="timeout" from="EnemyShootTimer" to="." method="_on_EnemyShootTimer_timeout"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_DeleteTimer_timeout"]

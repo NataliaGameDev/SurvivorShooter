@@ -74,11 +74,10 @@ valign = 1
 [node name="MoveTween" type="Tween" parent="Ready"]
 
 [node name="StartText" type="Node2D" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="StartTimer" type="Timer" parent="StartText"]
-wait_time = 5.0
+wait_time = 3.0
 one_shot = true
 
 [node name="TimerLabel" type="Label" parent="StartText"]

@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/EnemySpawner.gd" type="Script" id=1]
 [ext_resource path="res://Cenas/Enemies/Enemy1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Cenas/Enemies/Enemy2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Cenas/Enemies/Enemy3.tscn" type="PackedScene" id=4]
 
 [node name="EnemySpawner" type="Node2D"]
 script = ExtResource( 1 )
 enemy1 = ExtResource( 2 )
 enemy2 = ExtResource( 3 )
+enemy3 = ExtResource( 4 )
 
 [node name="Enemy1SpawnTimer" type="Timer" parent="."]
 autostart = true
@@ -15,5 +17,8 @@ autostart = true
 [node name="Enemy2SpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="Enemy3SpawnTimer" type="Timer" parent="."]
 [connection signal="timeout" from="Enemy1SpawnTimer" to="." method="_on_Enemy1SpawnTimer_timeout"]
 [connection signal="timeout" from="Enemy2SpawnTimer" to="." method="_on_Enemy2SpawnTimer_timeout"]
+[connection signal="timeout" from="Enemy3SpawnTimer" to="." method="_on_Enemy3SpawnTimer_timeout"]

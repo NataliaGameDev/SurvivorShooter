@@ -3,6 +3,9 @@ extends Area2D
 export var enemy_velocity = Vector2()
 export (PackedScene) var enemy_laser
 export (PackedScene) var enemy_explosion
+
+signal enemy1_destroyed
+
 var type = "enemy1"
 
 func _ready():
@@ -25,4 +28,13 @@ func _on_EnemyShootTimer_timeout():
 
 func _on_Enemy1_area_entered(area):
 	if area.type == "playerLaser" or area.type == "player":
-		queue_free()
+		$Enemy1_CollisionShape.set_deferred("disabled", true)
+		$Enemy1_sprite.hide()
+		$EnemyShootTimer.stop()
+		$DeleteTimer.start()
+		emit_signal("enemy1_destroyed")
+		$Enemy1Death.get_node("CPUParticles2D").emitting = true
+
+
+func _on_DeleteTimer_timeout():
+	queue_free()

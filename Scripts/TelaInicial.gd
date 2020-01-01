@@ -14,10 +14,12 @@ func _ready():
 func _on_SongsOff_pressed():
 	$Botoes/Conj2/SongsOff.hide()
 	$Botoes/Conj2/SongsOn.show()
+	$InitialMusic.stop()
 
 func _on_SongsOn_pressed():
 	$Botoes/Conj2/SongsOff.show()
 	$Botoes/Conj2/SongsOn.hide()
+	$InitialMusic.play()
 
 func _on_Start_pressed():
 	emit_signal("startPressed")

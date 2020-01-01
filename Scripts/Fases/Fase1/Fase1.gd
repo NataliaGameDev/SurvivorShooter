@@ -18,6 +18,7 @@ func _ready():
 	readyscreen.connect("StartLevel", self, "on_start_level_time")
 	player.connect("game_over", self, "on_game_over")
 	player.connect("hit", self, "on_player_hit")
+	enemySpawner.connect("shake_camera", self, "on_shake_camera")
 	add_child(readyscreen)
 	$CanvasLayer/HUD.hide()
 	get_tree().set_quit_on_go_back(false)
@@ -68,3 +69,9 @@ func _on_RestartLevel_pressed():
 	
 func _on_Back_pressed():
     emit_signal("phoneBackPressed")
+
+func _on_BattleMusic_finished():
+	$BattleMusic.play()
+
+func on_shake_camera():
+	$CameraFase1.shake()

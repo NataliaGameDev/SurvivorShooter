@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/GameScreen.wav-25c633dc4210d3b13bc1895529c2f978.sample"
+
+[deps]
+
+source_file="res://musica/GameScreen.wav"
+dest_files=[ "res://.import/GameScreen.wav-25c633dc4210d3b13bc1895529c2f978.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

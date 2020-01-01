@@ -6,6 +6,10 @@ var type = "enemy"
 #Jelly-Fish life
 var enemy2_life = 2
 
+func _ready():
+	$Enemy2Death.connect("AnimationFinished", self, "on_death_animation_finished")
+	$Enemy2Death.hide()
+
 func _process(delta):
 	translate(enemy_velocity * delta)
 	
@@ -19,4 +23,11 @@ func _on_Enemy2_area_entered(area):
 		enemy2_life -= 1
 	
 	if enemy2_life == 0:
-		queue_free()
+		$CollisionShape2D.set_deferred("disabled", true)
+		$AnimatedSprite.hide()
+		$Enemy2Death.show()
+		$Enemy2Death/AnimationPlayer.play("Splash")
+		$Enemy2Death/AudioStreamPlayer.play()
+
+func on_death_animation_finished():
+	queue_free()
