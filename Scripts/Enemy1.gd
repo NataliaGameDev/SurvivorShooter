@@ -1,24 +1,17 @@
-extends Area2D
+extends "res://Scripts/Commands.gd"
 
 export var enemy_velocity = Vector2()
 export (PackedScene) var enemy_laser
 export (PackedScene) var enemy_explosion
 
-signal enemy1_destroyed
-
 var type = "enemy1"
+var value = 1
 
 func _ready():
-	pass
+	velocity = enemy_velocity
 	
-func _process(delta):
-	translate(enemy_velocity * delta)
-	
-	if position.x >= get_viewport_rect().size.x or position.x <= 0:
-		enemy_velocity.x *= -1
-	
-	if position.y >= get_viewport_rect().size.y:
-		queue_free()
+func _process(delta):	
+	move(delta)
 
 func _on_EnemyShootTimer_timeout():
 	var new_enemyLaser = enemy_laser.instance()
@@ -32,7 +25,7 @@ func _on_Enemy1_area_entered(area):
 		$Enemy1_sprite.hide()
 		$EnemyShootTimer.stop()
 		$DeleteTimer.start()
-		emit_signal("enemy1_destroyed")
+		emit_signal("enemyDestroyed", self)
 		$Enemy1Death.get_node("CPUParticles2D").emitting = true
 
 

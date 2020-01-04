@@ -7,6 +7,9 @@ var player_life = 4
 signal game_over #Signal emited when player chances end
 signal hit #When player gets hit from enemy
 
+var fase_jellycoins = 0
+var total_jellycoins = 0
+
 var type = "player"
 
 # Called when the node enters the scene tree for the first time.

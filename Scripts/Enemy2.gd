@@ -1,7 +1,8 @@
-extends Area2D
+extends "res://Scripts/Commands.gd"
 
 export var enemy_velocity = Vector2()
 var type = "enemy2"
+var value = 2
 
 #Jelly-Fish life
 var enemy2_life = 2
@@ -30,4 +31,5 @@ func _on_Enemy2_area_entered(area):
 		$Enemy2Death/AudioStreamPlayer.play()
 
 func on_death_animation2_finished():
+	emit_signal("enemyDestroyed", self)
 	queue_free()

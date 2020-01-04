@@ -1,13 +1,15 @@
-extends Area2D
+extends "res://Scripts/Commands.gd"
 
-export var velocity = Vector2()
+export var enemy_velocity = Vector2()
 export (PackedScene) var projectile
 
 var type = "enemy3"
 
 var enemy3_life = 3
+var value = 3
 
 func _ready():
+	velocity = enemy_velocity
 	position = Vector2(get_viewport_rect().size.x/2, 0)
 	$Enemy3Death.connect("Animation2Finished", self, "on_animation2_finished")
 
@@ -24,6 +26,7 @@ func _on_Enemy3_area_entered(area):
 		enemy3_life -= 1
 	
 	if enemy3_life == 0:
+		emit_signal("enemyDestroyed", self)
 		$AnimatedSprite.hide()
 		$CollisionShape2D.set_deferred("disabled", true)
 		$Enemy3Death/AnimationPlayer.play("Splash2")

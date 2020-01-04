@@ -11,7 +11,9 @@
 radius = 22.0019
 height = 68.6063
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" groups=[
+"save",
+]]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true

@@ -20,6 +20,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="Enemy3SpawnTimer" type="Timer" parent="."]
+autostart = true
 [connection signal="timeout" from="Enemy1SpawnTimer" to="." method="_on_Enemy1SpawnTimer_timeout"]
 [connection signal="timeout" from="Enemy2SpawnTimer" to="." method="_on_Enemy2SpawnTimer_timeout"]
 [connection signal="timeout" from="Enemy3SpawnTimer" to="." method="_on_Enemy3SpawnTimer_timeout"]

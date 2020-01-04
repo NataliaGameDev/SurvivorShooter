@@ -1,5 +1,8 @@
 extends Node2D
 
+var save = load("res://Scripts/Commands.gd")
+onready var new_save = save.new()
+
 var stars = preload("res://Cenas/Stars.tscn").instance()
 var readyscreen = preload("res://Cenas/ReadyScreen.tscn").instance()
 var player = preload("res://Cenas/Player.tscn").instance()
@@ -22,11 +25,14 @@ func _ready():
 	player.connect("game_over", self, "on_game_over")
 	player.connect("hit", self, "on_player_hit")
 	enemySpawner.connect("shake_camera", self, "on_shake_camera")
+	enemySpawner.connect("increment_jelly_coin", self, "on_increment_jelly_coin")
 	powerUpSpawner.connect("playerLife", self, "on_player_life")
 	powerUpSpawner.connect("playerAggressive", self, "on_PlayerAggressive")
+	powerUpSpawner.connect("playerSaw", self, "on_PlayerSaw")
 	add_child(readyscreen)
 	$CanvasLayer/HUD.hide()
 	get_tree().set_quit_on_go_back(false)
+	
 
 func _process(delta):
 	if gameTime == (30 + level):
@@ -66,6 +72,8 @@ func on_game_over():
 	remove_child(powerUpSpawner)
 	$GameTime.stop()
 	$CanvasLayer/GameOverNode.game_over_movement()
+	player.total_jellycoins += player.fase_jellycoins
+	new_save.organize_saves(get_tree().get_nodes_in_group("save"))
 
 func on_player_hit():
 	$CameraFase1.shake()
@@ -102,6 +110,20 @@ func on_player_life():
 func on_PlayerAggressive():
 	var new_powerUp2 = playerPowerUp2.instance()
 	player.add_child(new_powerUp2)
+
+func on_PlayerSaw():
+	pass
+
+func on_increment_jelly_coin(enemy):
+	if enemy.type == "enemy1":
+		player.fase_jellycoins +=1
+		$CanvasLayer/HUD/PlayerJellyCoins.text = str(player.fase_jellycoins)
+	elif enemy.type == "enemy2":
+		player.fase_jellycoins +=2
+		$CanvasLayer/HUD/PlayerJellyCoins.text = str(player.fase_jellycoins)
+	else:
+		player.fase_jellycoins +=3
+		$CanvasLayer/HUD/PlayerJellyCoins.text = str(player.fase_jellycoins)
 
 #implementando o sistema de levels: Cada level terá dução de 30s + level
 #Quando o game GameTime terminar, o level deve ser encerrado, as pontuações
