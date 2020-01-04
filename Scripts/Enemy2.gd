@@ -1,13 +1,13 @@
 extends Area2D
 
 export var enemy_velocity = Vector2()
-var type = "enemy"
+var type = "enemy2"
 
 #Jelly-Fish life
 var enemy2_life = 2
 
 func _ready():
-	$Enemy2Death.connect("AnimationFinished", self, "on_death_animation_finished")
+	$Enemy2Death.connect("Animation2Finished", self, "on_death_animation2_finished")
 	$Enemy2Death.hide()
 
 func _process(delta):
@@ -29,5 +29,5 @@ func _on_Enemy2_area_entered(area):
 		$Enemy2Death/AnimationPlayer.play("Splash")
 		$Enemy2Death/AudioStreamPlayer.play()
 
-func on_death_animation_finished():
+func on_death_animation2_finished():
 	queue_free()

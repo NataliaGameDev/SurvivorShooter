@@ -12,6 +12,7 @@ enemy2 = ExtResource( 3 )
 enemy3 = ExtResource( 4 )
 
 [node name="Enemy1SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [node name="Enemy2SpawnTimer" type="Timer" parent="."]

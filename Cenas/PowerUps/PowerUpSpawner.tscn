@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/PowerUpSpawner.gd" type="Script" id=1]
+[ext_resource path="res://Cenas/PowerUps/Poweup1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Cenas/PowerUps/PowerUp2.tscn" type="PackedScene" id=3]
+
+[node name="PowerUpSpawner" type="Node2D"]
+script = ExtResource( 1 )
+powerup1 = ExtResource( 2 )
+powerup2 = ExtResource( 3 )
+
+[node name="PowerUp1_spawner" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="PoweUp2_spawner" type="Timer" parent="."]
+wait_time = 13.0
+autostart = true
+[connection signal="timeout" from="PowerUp1_spawner" to="." method="_on_PowerUp1_spawner_timeout"]
+[connection signal="timeout" from="PoweUp2_spawner" to="." method="_on_PoweUp2_spawner_timeout"]

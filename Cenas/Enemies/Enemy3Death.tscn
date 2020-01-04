@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Enemy2Death.gd" type="Script" id=1]
-[ext_resource path="res://Assets/JellyFishSplash.png" type="Texture" id=2]
+[ext_resource path="res://Assets/RedJellyFishSplash.png" type="Texture" id=2]
 [ext_resource path="res://musica/water_sound.ogg" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=1]

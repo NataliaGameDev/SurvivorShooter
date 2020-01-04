@@ -24,6 +24,7 @@ func _on_Enemy1SpawnTimer_timeout():
 	#pass # Replace with function body.
 
 func _on_Enemy2SpawnTimer_timeout():
+	
 	var new_enemy2 = enemy2.instance()
 	new_enemy2.position = Vector2( randi() % int(get_viewport_rect().size.x), 0)
 	add_child(new_enemy2)

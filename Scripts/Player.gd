@@ -30,9 +30,8 @@ func _on_ShootTimer_timeout():
 	new_projectile.position = Vector2(position.x, position.y - 70)
 	add_child(new_projectile)
 
-
 func _on_Player_area_entered(area):
-	if area.type == "playerLaser":
+	if area.type == "playerLaser" or area.type == "powerUp":
 		player_life = player_life
 	elif player_life == 0:
 		$DamageFade/Fade.play("DamageFade")

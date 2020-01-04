@@ -26,7 +26,6 @@ enemy_velocity = Vector2( 0, 250 )
 scale = Vector2( 1.3, 1.3 )
 frames = SubResource( 1 )
 animation = "Enemy2"
-frame = 1
 speed_scale = 0.5
 playing = true
 

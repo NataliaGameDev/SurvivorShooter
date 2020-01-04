@@ -5,10 +5,13 @@ var readyscreen = preload("res://Cenas/ReadyScreen.tscn").instance()
 var player = preload("res://Cenas/Player.tscn").instance()
 var enemySpawner = preload("res://Cenas/Enemies/EnemySpawner.tscn").instance()
 var enemyExplosion = preload("res://Cenas/Enemies/EnemyExplosion.tscn")
+var powerUpSpawner = preload("res://Cenas/PowerUps/PowerUpSpawner.tscn").instance()
+var playerPowerUp2 = preload("res://Cenas/PowerUps/PlayerPowerUp2.tscn")
 #var HUD = preload("res://Cenas/HUD/HUD.tscn").instance()
 
 var lifeCounter = 0 #diz respeito à quantidade de corações na HUD
 var gameTime = 0
+var level = 0
 
 signal restartLevel1
 signal phoneBackPressed
@@ -19,9 +22,19 @@ func _ready():
 	player.connect("game_over", self, "on_game_over")
 	player.connect("hit", self, "on_player_hit")
 	enemySpawner.connect("shake_camera", self, "on_shake_camera")
+	powerUpSpawner.connect("playerLife", self, "on_player_life")
+	powerUpSpawner.connect("playerAggressive", self, "on_PlayerAggressive")
 	add_child(readyscreen)
 	$CanvasLayer/HUD.hide()
 	get_tree().set_quit_on_go_back(false)
+
+func _process(delta):
+	if gameTime == (30 + level):
+		pass
+		#Parar o jogo
+		# Mostrar uma tela com as pontuações
+		# e com a opção de ir ao proximo nível
+		#Salvar o progresso
 	
 func _notification(what):
     if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
@@ -36,6 +49,7 @@ func on_start_level_time():
 	add_child(stars)
 	add_child(player)
 	add_child(enemySpawner)
+	add_child(powerUpSpawner)
 	$CanvasLayer/HUD.show()
 	$GameTime.start()
 
@@ -49,8 +63,9 @@ func on_game_over():
 	player.get_node("CollisionShape2D").set_deferred("disabled", true)
 	player.get_node("ShootTimer").stop()
 	remove_child(enemySpawner)
+	remove_child(powerUpSpawner)
 	$GameTime.stop()
-	$CanvasLayer/GameOverNode.game_over_movement()	
+	$CanvasLayer/GameOverNode.game_over_movement()
 
 func on_player_hit():
 	$CameraFase1.shake()
@@ -75,3 +90,20 @@ func _on_BattleMusic_finished():
 
 func on_shake_camera():
 	$CameraFase1.shake()
+
+func on_player_life():
+	if lifeCounter > 0:
+		lifeCounter -= 1
+	if player.player_life <= 3:
+		player.player_life += 1
+	$CanvasLayer/HUD/PlayerLife.get_node("Life" + str(lifeCounter)).show()
+	$PowerUpSong.play()
+
+func on_PlayerAggressive():
+	var new_powerUp2 = playerPowerUp2.instance()
+	player.add_child(new_powerUp2)
+
+#implementando o sistema de levels: Cada level terá dução de 30s + level
+#Quando o game GameTime terminar, o level deve ser encerrado, as pontuações
+#devem ser informadas na tela e deve-se ter um botão para iniciar o
+#proximo level
