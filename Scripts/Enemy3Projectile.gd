@@ -20,5 +20,5 @@ func set_projectile3_velocity(velocity):
 	projectile3_velocity.y = velocity.y
 
 func _on_Enemy3Projectile_area_entered(area):
-	if area.type == "player":
+	if area.type == "player" or area.type == "player_powerUp":
 		queue_free()

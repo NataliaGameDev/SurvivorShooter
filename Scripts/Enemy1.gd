@@ -20,7 +20,7 @@ func _on_EnemyShootTimer_timeout():
 	get_parent().add_child(new_enemyLaser)
 
 func _on_Enemy1_area_entered(area):
-	if area.type == "playerLaser" or area.type == "player":
+	if area.type == "playerLaser" or area.type == "player" or area.type == "player_powerUp":
 		$Enemy1_CollisionShape.set_deferred("disabled", true)
 		$Enemy1_sprite.hide()
 		$EnemyShootTimer.stop()

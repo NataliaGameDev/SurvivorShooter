@@ -36,7 +36,7 @@ func save(node):
 		save_dict = {
 	        "filename" : node.get_filename(),
 	        "parent" : node.get_parent().get_path(),
-	        "total_jellycoins" : node.total_jellycoins
+	        "total_silver_jellycoins" : node.total_silver_jellycoins
 			}
 	return save_dict
 

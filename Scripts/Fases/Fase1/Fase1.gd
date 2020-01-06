@@ -10,6 +10,7 @@ var enemySpawner = preload("res://Cenas/Enemies/EnemySpawner.tscn").instance()
 var enemyExplosion = preload("res://Cenas/Enemies/EnemyExplosion.tscn")
 var powerUpSpawner = preload("res://Cenas/PowerUps/PowerUpSpawner.tscn").instance()
 var playerPowerUp2 = preload("res://Cenas/PowerUps/PlayerPowerUp2.tscn")
+var playerPowerUp3 = preload("res://Cenas/PowerUps/PlayerPowerUp3.tscn")
 #var HUD = preload("res://Cenas/HUD/HUD.tscn").instance()
 
 var lifeCounter = 0 #diz respeito à quantidade de corações na HUD
@@ -72,7 +73,7 @@ func on_game_over():
 	remove_child(powerUpSpawner)
 	$GameTime.stop()
 	$CanvasLayer/GameOverNode.game_over_movement()
-	player.total_jellycoins += player.fase_jellycoins
+	player.total_silver_jellycoins += player.fase_silver_jellycoins
 	new_save.organize_saves(get_tree().get_nodes_in_group("save"))
 
 func on_player_hit():
@@ -112,18 +113,19 @@ func on_PlayerAggressive():
 	player.add_child(new_powerUp2)
 
 func on_PlayerSaw():
-	pass
+	var new_powerUp3 = playerPowerUp3.instance()
+	player.add_child(new_powerUp3)
 
 func on_increment_jelly_coin(enemy):
 	if enemy.type == "enemy1":
-		player.fase_jellycoins +=1
-		$CanvasLayer/HUD/PlayerJellyCoins.text = str(player.fase_jellycoins)
+		player.fase_silver_jellycoins +=1
+		$CanvasLayer/HUD/PlayerJellyCoins.text = str(player.fase_silver_jellycoins)
 	elif enemy.type == "enemy2":
-		player.fase_jellycoins +=2
-		$CanvasLayer/HUD/PlayerJellyCoins.text = str(player.fase_jellycoins)
+		player.fase_silver_jellycoins +=2
+		$CanvasLayer/HUD/PlayerJellyCoins.text = str(player.fase_silver_jellycoins)
 	else:
-		player.fase_jellycoins +=3
-		$CanvasLayer/HUD/PlayerJellyCoins.text = str(player.fase_jellycoins)
+		player.fase_silver_jellycoins +=3
+		$CanvasLayer/HUD/PlayerJellyCoins.text = str(player.fase_silver_jellycoins)
 
 #implementando o sistema de levels: Cada level terá dução de 30s + level
 #Quando o game GameTime terminar, o level deve ser encerrado, as pontuações

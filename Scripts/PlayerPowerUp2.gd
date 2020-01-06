@@ -4,6 +4,9 @@ export (PackedScene) var proj
 
 var shoot = 4
 
+func _ready():
+	$PowerUp2Song.play()
+
 func _on_PowerUp2Timer_timeout():
 	$ShooterTimer.stop()
 	queue_free()

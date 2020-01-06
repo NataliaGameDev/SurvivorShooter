@@ -34,4 +34,5 @@ func _on_PoweUp3_spawner_timeout():
 
 
 func on_got_PowerUp3():
+	$SawSong.play()
 	emit_signal("playerSaw")

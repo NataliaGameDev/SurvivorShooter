@@ -20,7 +20,7 @@ func _process(delta):
 func _on_Enemy2_area_entered(area):
 	if area.type == "player":
 		queue_free()
-	elif area.type == "playerLaser" and enemy2_life > 0:
+	elif (area.type == "playerLaser" or area.type == "player_powerUp") and enemy2_life > 0:
 		enemy2_life -= 1
 	
 	if enemy2_life == 0:

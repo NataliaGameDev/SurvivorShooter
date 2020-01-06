@@ -16,5 +16,5 @@ func get_laser_velocity():
 
 
 func _on_Enemy1_laser_area_entered(area):
-	if area.type == "player":
+	if area.type == "player" or area.type == "player_powerUp":
 		queue_free()

@@ -36,6 +36,7 @@ func on_enemyDestroyed(enemy):
 	emit_signal("increment_jelly_coin", enemy)
 
 func _on_Enemy3SpawnTimer_timeout():
+	
 	var new_enemy3 = enemy3.instance()
 	new_enemy3.connect("enemyDestroyed", self, "on_enemyDestroyed")
 	new_enemy3.position = Vector2( randi() % int(get_viewport_rect().size.x), 0)
