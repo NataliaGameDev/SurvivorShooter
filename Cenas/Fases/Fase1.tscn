@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Fases/Fase1/Fase1.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Cenas/HUD/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://musica/arcade_war.wav" type="AudioStream" id=6]
 [ext_resource path="res://musica/powerUp.wav" type="AudioStream" id=7]
+[ext_resource path="res://Cenas/Pontuations/Pontuations.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -72,6 +73,8 @@ autoplay = true
 
 [node name="PowerUpSong" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
+
+[node name="Pontuations" parent="." instance=ExtResource( 8 )]
 [connection signal="timeout" from="GameTime" to="." method="_on_GameTime_timeout"]
 [connection signal="pressed" from="CanvasLayer/GameOverNode/GameOverButtons/RestartLevel" to="." method="_on_RestartLevel_pressed"]
 [connection signal="finished" from="BattleMusic" to="." method="_on_BattleMusic_finished"]

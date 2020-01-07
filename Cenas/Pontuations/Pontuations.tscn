@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Pontuations.gd" type="Script" id=1]
+[ext_resource path="res://Fontes/earthorbiterbold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://musica/249524__pearcewilsonking__badass-victory.wav" type="AudioStream" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 90
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 80
+font_data = ExtResource( 2 )
+
+[node name="Pontuations" type="Node2D"]
+position = Vector2( -18.636, 913.162 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 470.705, 536.956, 664.158, 613.807, 786.059 ],
+"_edit_vertical_guides_": [ 388.17 ]
+}
+
+[node name="Victory" type="Label" parent="."]
+margin_left = 81.7466
+margin_top = 168.08
+margin_right = 534.747
+margin_bottom = 258.08
+custom_fonts/font = SubResource( 1 )
+text = "VICTORY!"
+align = 1
+valign = 1
+
+[node name="DestroyedEnemies" type="Label" parent="."]
+margin_left = 69.2896
+margin_top = 390.795
+margin_right = 332.289
+margin_bottom = 473.795
+custom_fonts/font = SubResource( 2 )
+text = "Destroyed
+Enemies: "
+align = 1
+valign = 1
+
+[node name="Escaped" type="Label" parent="."]
+margin_left = 47.9823
+margin_top = 512.142
+margin_right = 382.982
+margin_bottom = 638.142
+custom_fonts/font = SubResource( 2 )
+text = "Enemies
+That Survived:"
+align = 1
+valign = 1
+
+[node name="JellyCoinsEarned" type="Label" parent="."]
+margin_left = -29.25
+margin_top = 662.411
+margin_right = 411.75
+margin_bottom = 788.411
+custom_fonts/font = SubResource( 2 )
+text = "SILVER
+JELLYCOINS
+EARNED:"
+align = 1
+valign = 1
+
+[node name="Quant1" type="Label" parent="."]
+margin_left = 405.512
+margin_top = 399.341
+margin_right = 525.512
+margin_bottom = 479.341
+custom_fonts/font = SubResource( 3 )
+text = "00"
+
+[node name="Quant2" type="Label" parent="."]
+margin_left = 406.708
+margin_top = 533.676
+margin_right = 526.708
+margin_bottom = 613.676
+custom_fonts/font = SubResource( 3 )
+text = "00"
+
+[node name="Quant3" type="Label" parent="."]
+margin_left = 408.769
+margin_top = 682.323
+margin_right = 528.769
+margin_bottom = 762.323
+custom_fonts/font = SubResource( 3 )
+text = "00"
+
+[node name="VictoryTwin" type="Tween" parent="."]
+
+[node name="VictoryMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )

@@ -44,6 +44,6 @@ func _on_Enemy3SpawnTimer_timeout():
 	sort_Enemy3SpawnTimer()
 
 func sort_Enemy3SpawnTimer():
-	var time = randi() % 30
+	var time = randi() % 20
 	$Enemy3SpawnTimer.wait_time = time
 	$Enemy3SpawnTimer.start()

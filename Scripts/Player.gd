@@ -48,3 +48,7 @@ func _on_Player_area_entered(area):
 		$PlayerHit.play()
 		emit_signal("hit")
 		player_life -= 1
+		
+func play_victory_animation():
+	pass
+	
