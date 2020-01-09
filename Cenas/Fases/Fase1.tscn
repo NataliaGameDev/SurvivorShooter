@@ -5,9 +5,9 @@
 [ext_resource path="res://Scripts/MoveGameOver.gd" type="Script" id=3]
 [ext_resource path="res://Fontes/earthorbiterbold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Cenas/HUD/HUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://musica/arcade_war.wav" type="AudioStream" id=6]
-[ext_resource path="res://musica/powerUp.wav" type="AudioStream" id=7]
-[ext_resource path="res://Cenas/Pontuations/Pontuations.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Cenas/Pontuations/Pontuations.tscn" type="PackedScene" id=6]
+[ext_resource path="res://musica/arcade_war.wav" type="AudioStream" id=7]
+[ext_resource path="res://musica/powerUp.wav" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -67,14 +67,14 @@ valign = 1
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
 
+[node name="Pontuations" parent="CanvasLayer" instance=ExtResource( 6 )]
+
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 7 )
 autoplay = true
 
 [node name="PowerUpSong" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 7 )
-
-[node name="Pontuations" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 8 )
 [connection signal="timeout" from="GameTime" to="." method="_on_GameTime_timeout"]
 [connection signal="pressed" from="CanvasLayer/GameOverNode/GameOverButtons/RestartLevel" to="." method="_on_RestartLevel_pressed"]
 [connection signal="finished" from="BattleMusic" to="." method="_on_BattleMusic_finished"]

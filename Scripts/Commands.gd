@@ -6,6 +6,7 @@ var velocity = Vector2()
 var _to_save = []
 
 signal enemyDestroyed(enemy)
+signal enemyScaped
 
 func move(delta):
 	translate(velocity * delta)
@@ -14,6 +15,7 @@ func move(delta):
 		velocity.x *= -1
 
 	if position.y > get_viewport_rect().size.y:
+		emit_signal("enemyScaped")
 		queue_free()
 
 func organize_saves(nodes_to_be_saved):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Pontuations.gd" type="Script" id=1]
 [ext_resource path="res://Fontes/earthorbiterbold.ttf" type="DynamicFontData" id=2]
@@ -16,12 +16,17 @@ font_data = ExtResource( 2 )
 size = 80
 font_data = ExtResource( 2 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 50
+font_data = ExtResource( 2 )
+
 [node name="Pontuations" type="Node2D"]
 position = Vector2( -18.636, 913.162 )
+z_index = 10
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 470.705, 536.956, 664.158, 613.807, 786.059 ],
-"_edit_vertical_guides_": [ 388.17 ]
+"_edit_horizontal_guides_": [ 470.705, 536.956, 664.158, 613.807, 786.059, 1835.85 ],
+"_edit_vertical_guides_": [ 388.17, 577.287 ]
 }
 
 [node name="Victory" type="Label" parent="."]
@@ -96,3 +101,22 @@ text = "00"
 
 [node name="VictoryMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="PontuationsQuitButton" type="Button" parent="."]
+margin_left = 414.4
+margin_top = 873.521
+margin_right = 566.4
+margin_bottom = 929.521
+custom_fonts/font = SubResource( 4 )
+text = "QUIT"
+flat = true
+
+[node name="PontuationsContinueButton" type="Button" parent="."]
+margin_left = 47.6224
+margin_top = 874.582
+margin_right = 334.622
+margin_bottom = 930.582
+custom_fonts/font = SubResource( 4 )
+text = "CONTINUE"
+flat = true
+[connection signal="pressed" from="PontuationsQuitButton" to="." method="_on_PontuationsQuitButton_pressed"]

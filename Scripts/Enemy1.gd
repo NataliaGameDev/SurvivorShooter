@@ -9,6 +9,7 @@ var value = 1
 
 func _ready():
 	velocity = enemy_velocity
+	connect("enemyScaped", self, "on_enemyScaped")
 	
 func _process(delta):	
 	move(delta)
@@ -31,3 +32,7 @@ func _on_Enemy1_area_entered(area):
 
 func _on_DeleteTimer_timeout():
 	queue_free()
+
+
+func on_enemyScaped():
+	emit_signal("increment_enemyScaped")

@@ -10,12 +10,11 @@ var enemy2_life = 2
 func _ready():
 	$Enemy2Death.connect("Animation2Finished", self, "on_death_animation2_finished")
 	$Enemy2Death.hide()
+	velocity = enemy_velocity
 
 func _process(delta):
-	translate(enemy_velocity * delta)
 	
-	if position.y >= get_viewport_rect().size.y:
-		queue_free()
+	move(delta)
 
 func _on_Enemy2_area_entered(area):
 	if area.type == "player":

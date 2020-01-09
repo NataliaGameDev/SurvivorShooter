@@ -14,10 +14,7 @@ func _ready():
 	$Enemy3Death.connect("Animation2Finished", self, "on_animation2_finished")
 
 func _process(delta):
-	translate(velocity * delta)
-	
-	if position.y >= get_viewport_rect().size.y:
-		queue_free()
+	move(delta)
 
 func _on_Enemy3_area_entered(area):
 	if area.type == "player":

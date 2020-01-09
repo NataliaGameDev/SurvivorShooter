@@ -23,6 +23,7 @@ var escaped_enemies = 0
 
 signal restartLevel1
 signal phoneBackPressed
+signal PontuationsquitPressed
 
 
 func _ready():
@@ -31,13 +32,15 @@ func _ready():
 	player.connect("hit", self, "on_player_hit")
 	enemySpawner.connect("shake_camera", self, "on_shake_camera")
 	enemySpawner.connect("increment_jelly_coin", self, "on_increment_jelly_coin")
+	enemySpawner.connect("increment_ScapedEnemies", self, "on_increment_ScapedEnemies")
 	powerUpSpawner.connect("playerLife", self, "on_player_life")
 	powerUpSpawner.connect("playerAggressive", self, "on_PlayerAggressive")
 	powerUpSpawner.connect("playerSaw", self, "on_PlayerSaw")
+	$CanvasLayer/Pontuations.connect("pontuationsQuitPressed", self, "on_pontuationsQuitPressed")
 	add_child(readyscreen)
 	$CanvasLayer/HUD.hide()
 	get_tree().set_quit_on_go_back(false)
-	$Pontuations.hide()
+	$CanvasLayer/Pontuations.hide()
 
 func _process(delta):
 	pass
@@ -119,6 +122,10 @@ func on_PlayerAggressive():
 func on_PlayerSaw():
 	var new_powerUp3 = playerPowerUp3.instance()
 	player.add_child(new_powerUp3)
+	
+
+func on_increment_ScapedEnemies():
+	escaped_enemies += 1
 
 func on_increment_jelly_coin(enemy):
 	if enemy.type == "enemy1":
@@ -154,12 +161,15 @@ func on_level_time_end():
 
 
 func on_callPontuation():
-	$Pontuations.show()
-	$Pontuations.movement()
+	$CanvasLayer/Pontuations.show()
+	$CanvasLayer/Pontuations.movement()
 	
-	$Pontuations/Quant1.text = str(destroyed_enemies)
-	#Colocar aqui o quant2
-	$Pontuations/Quant3.text = str(player.fase_silver_jellycoins)
+	$CanvasLayer/Pontuations/Quant1.text = str(destroyed_enemies)
+	$CanvasLayer/Pontuations/Quant2.text = str(escaped_enemies)
+	$CanvasLayer/Pontuations/Quant3.text = str(player.fase_silver_jellycoins)
+	
+func on_pontuationsQuitPressed():
+	emit_signal("PontuationsquitPressed")
 #implementando o sistema de levels: Cada level terá dução de 30s + level
 #Quando o game GameTime terminar, o level deve ser encerrado, as pontuações
 #devem ser informadas na tela e deve-se ter um botão para iniciar o
