@@ -45,7 +45,8 @@ func _on_Player_area_entered(area):
 	else:
 		Input.vibrate_handheld(100)
 		$DamageFade/Fade.play("DamageFade")
-		$PlayerHit.play()
+		if get_parent().get_parent().is_song_on:
+			$PlayerHit.play()
 		emit_signal("hit")
 		player_life -= 1
 		

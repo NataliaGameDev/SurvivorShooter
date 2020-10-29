@@ -3,6 +3,10 @@ extends Area2D
 export var projectile_velocity = Vector2()
 var type = "playerLaser"
 
+func _ready():
+	if get_parent().get_parent().get_parent().is_song_on:
+		$AudioStreamPlayer2D.play()
+
 func _process(delta): #Posição do player no momento
 	position += projectile_velocity * delta
 	
