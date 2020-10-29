@@ -7,12 +7,14 @@ var player = load("res://Cenas/Player.tscn").instance()
 var fase1 = load("res://Cenas/Fases/Fase1.tscn").instance()
 
 var atual_level = 1
+var is_song_on = true
 
-var music_stop_position = 0	
+var music_stop_position = 0
 
 func _ready():
 	get_tree().paused = false
 	initialScene.connect("startPressed", self, "_on_start_pressed")
+	initialScene.connect("songConfChanged", self, "_on_songConf_changed")
 	loadingScene.connect("LoadingTimeOut", self, "_on_loading_time_out")
 	fase1.connect("restartLevel1", self, "on_restart_level1")
 	fase1.get_node("CanvasLayer").get_node("HUD").connect("quitPressed", self, "on_quit_pressed")
@@ -59,3 +61,9 @@ func on_phoneBackPressed():
 	
 func on_PontuationsquitPressed():
 	_on_QuitToMenu_pressed()
+
+func _on_songConf_changed():
+	if is_song_on:
+		is_song_on = false
+	else:
+		is_song_on = true

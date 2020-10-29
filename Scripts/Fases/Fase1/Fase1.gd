@@ -48,10 +48,10 @@ func _process(delta):
 		#Mostrar a tela de pontuações
 		#Ir para o próximo nível
 func _notification(what):
-    if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
-        _on_Back_pressed()
-    if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-        _on_Back_pressed()
+	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
+		_on_Back_pressed()
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		_on_Back_pressed()
 
 func on_start_level_time():
 	if player.get_node("ShootTimer").is_stopped():
@@ -63,6 +63,8 @@ func on_start_level_time():
 	add_child(powerUpSpawner)
 	$CanvasLayer/HUD.show()
 	$GameTime.start()
+	if get_parent().is_song_on:
+		$BattleMusic.play()
 
 func on_game_over():
 	var new_explosion = enemyExplosion.instance()
@@ -99,7 +101,7 @@ func _on_RestartLevel_pressed():
 	emit_signal("restartLevel1")
 	
 func _on_Back_pressed():
-    emit_signal("phoneBackPressed")
+	emit_signal("phoneBackPressed")
 
 func _on_BattleMusic_finished():
 	$BattleMusic.play()

@@ -71,7 +71,6 @@ valign = 1
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-autoplay = true
 
 [node name="PowerUpSong" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
